@@ -1,10 +1,13 @@
+export type TransactionType = "Gasto" | "Ingreso" | "Expense" | "Income";
+
 export interface Transaction {
   id: number;
-  category_id: number;
   amount: number;
-  date: number;
   description: string;
-  type: "Expense" | "Income";
+  category_id: number;
+  date: number;
+  type: "Expense" | "Income" | "Transfer"; // Añadido "Transfer"
+  paymentMethod: string; // Añadido el método de pago
 }
 
 export interface Category {

@@ -1,35 +1,30 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { View, FlatList, StyleSheet } from "react-native";
 import { Category, Transaction } from "../types";
 import TransactionListItem from "./TransactionListItem";
 
-export default function TransactionList({
-  transactions,
-  categories,
-  deleteTransaction,
-}: {
+type Props = {
   categories: Category[];
   transactions: Transaction[];
-  deleteTransaction: (id: number) => Promise<void>;
-}) {
+  deleteTransaction: (id: number) => void;
+};
+
+const TransactionList: React.FC<Props> = ({ categories, transactions, deleteTransaction }) => {
   return (
-    <View style={{ gap: 15 }}>
-      {transactions.map((transaction) => {
-        const categoryForCurrentItem = categories.find(
-          (category) => category.id === transaction.category_id
-        );
-        return (
-          <TouchableOpacity
-            key={transaction.id}
-            activeOpacity={0.7}
-            onLongPress={() => deleteTransaction(transaction.id)}
-          >
-            <TransactionListItem
-              transaction={transaction}
-              categoryInfo={categoryForCurrentItem}
-            />
-          </TouchableOpacity>
-        );
-      })}
-    </View>
+    <FlatList
+      contentContainerStyle={styles.container}
+      data={transactions}
+      renderItem={({ item }) => <TransactionListItem transaction={item} categories={categories} />}
+      keyExtractor={(item) => item.id.toString()}
+    />
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    padding: 15,
+  },
+});
+
+export default TransactionList;

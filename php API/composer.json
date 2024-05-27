@@ -1,0 +1,12 @@
+{
+    "name": "joledev/me-queda-feria-api",
+    "authors": [
+        {
+            "name": "Joel Ernesto Lopez Verdugo",
+            "email": "joel.ernesto.lopez.verdugo@uabc.edu.mx"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
